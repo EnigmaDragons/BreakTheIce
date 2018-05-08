@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class ServerMap
 {
-    private List<Node>
+    private List<Node> nodes;
 
-    public ServerMap()
+    public ServerMap(List<Node> nodes)
     {
+        this.nodes = nodes;
+    }
 
+    public List<Node> GetNodes()
+    {
+        return nodes;
     }
 }
