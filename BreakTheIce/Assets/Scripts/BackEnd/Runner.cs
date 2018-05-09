@@ -1,17 +1,20 @@
-﻿public class Runner
+﻿namespace BreakTheIce.BackEnd
 {
-    public int Money { get; private set; }
-    public int MaxHP { get; private set; }
-    public int Hp { get; private set; }
-    public int BrainDamage { get; private set; }
-    public int Tags { get; private set; }
-    
-    public Runner(int hp, int money = 0)
+    public class Runner
     {
-        Money = money;
-        MaxHP = hp;
-        Hp = hp;
-        BrainDamage = 0;
-        Tags = 0;
+        public int Money { get; private set; }
+        public int MaxHP { get; private set; }
+        public int Hp { get; private set; }
+        public int BrainDamage { get; private set; }
+        public int Tags { get; private set; }
+
+        public Runner(int hp, int money = 0)
+        {
+            Money = money;
+            MaxHP = hp;
+            Hp = hp;
+            BrainDamage = 0;
+            Tags = 0;
+        }
     }
 }
