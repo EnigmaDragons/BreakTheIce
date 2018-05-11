@@ -1,10 +1,11 @@
-﻿using NUnit.Framework;
+﻿using System.Collections.Generic;
+using NUnit.Framework;
 
 public class NewTestScript {
 
     [Test]
     public void Add()
     {
-        Assert.AreEqual(2 + 2, 4);
+        var serverrMap = new ServerMap(new List<Node>());
     }
 }
