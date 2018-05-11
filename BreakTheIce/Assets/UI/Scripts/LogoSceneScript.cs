@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public sealed class FadeInThenOut : MonoBehaviour
+public sealed class LogoSceneScript : MonoBehaviour
 {
     public float durationBefore;
     public float durationIn;
@@ -17,7 +17,8 @@ public sealed class FadeInThenOut : MonoBehaviour
             new Delay(this, durationBefore),
             new CrossFade(image, 1, durationIn),
             new Delay(this, durationBetween),
-            new CrossFade(image, 0, durationOut))
+            new CrossFade(image, 0, durationOut),
+            new NavigateToScene(Scenes.MainMenu))
                 .Go();
     }
     
