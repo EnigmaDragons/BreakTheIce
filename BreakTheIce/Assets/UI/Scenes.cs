@@ -3,7 +3,7 @@ namespace Assets.UI
 {
     public static class Scenes
     {
-        public static string Logo => "Logo";
-        public static string MainMenu => "MainMenu";
+        public const string Logo => "Logo";
+        public const string MainMenu => "MainMenu";
     }
 }
