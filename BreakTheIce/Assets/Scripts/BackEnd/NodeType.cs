@@ -2,6 +2,11 @@
 {
     public enum NodeType
     {
-        None
+        None,
+        Boss,
+        Barrier,
+        CodeGate,
+        Sentry,
+        Checkpoint
     }
 }
