@@ -15,16 +15,6 @@ namespace Assets.Scripts.BackEnd
             this.nextShuffles = new Queue<List<int>>(nextShuffles);
         }
 
-        public int Int()
-        {
-            return nextResults.Dequeue();
-        }
-
-        public int Int(int max)
-        {
-            return nextResults.Dequeue();
-        }
-
         public int Int(int min, int max)
         {
             return nextResults.Dequeue();

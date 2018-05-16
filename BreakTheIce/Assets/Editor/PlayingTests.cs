@@ -12,27 +12,23 @@ public class PlayingTests
     [Test]
     public void PlayingFromHandDiscardsTheCardAfterwords()
     {
-        var blank = new BlankProgram();
-        var runner = new Runner(new Rng(new Random()), new List<Program>() { blank }, 1);
-        runner.StartBattle();
-        runner.Draw();
+        var program = new BlankProgram();
+        var runner = SetupRunnerWith(program);
 
-        runner.PlayFromHand(blank);
+        runner.PlayFromHand(program);
 
         Assert.AreEqual(0, runner.Hand.Count());
-        Assert.IsTrue(runner.Heap.Contains(blank));
+        Assert.IsTrue(runner.Heap.Contains(program));
     }
 
     [Test]
     public void PlayingFromHandSpendsTime()
     {
-        var blank = new ExpensiveBlankProgram();
-        var runner = new Runner(new Rng(new Random()), new List<Program>() { blank }, 1);
-        runner.StartBattle();
-        runner.Draw();
+        var program = new ExpensiveBlankProgram();
+        Runner runner = SetupRunnerWith(program);
         var time = runner.Time;
 
-        runner.PlayFromHand(blank);
+        runner.PlayFromHand(program);
 
         Assert.AreEqual(time - 2, runner.Time);
     }
@@ -40,13 +36,19 @@ public class PlayingTests
     [Test]
     public void PlayingFromHandResolvesTheProgram()
     {
-        var gainMaxHp = new GainMaxHpProgram();
-        var runner = new Runner(new Rng(new Random()), new List<Program>() { gainMaxHp }, 1);
+        var program = new GainMaxHpProgram();
+        Runner runner = SetupRunnerWith(program);
+
+        runner.PlayFromHand(program);
+
+        Assert.Greater(runner.MaxHP, 1);
+    }
+
+    private static Runner SetupRunnerWith(Program program)
+    {
+        var runner = new Runner(new Rng(new Random()), new List<Program>() { program }, 1);
         runner.StartBattle();
         runner.Draw();
-
-        runner.PlayFromHand(gainMaxHp);
-
-        Assert.AreEqual(2, runner.MaxHP);
+        return runner;
     }
 }

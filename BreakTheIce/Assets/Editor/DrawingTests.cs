@@ -12,42 +12,38 @@ public class DrawingTests
     [Test]
     public void DrawingACardMovesACardFromStackToHand()
     {
-        var blank = new BlankProgram();
-        var runner = new Runner(new Rng(new Random()), new List<Program>() { blank }, 1);
-        runner.StartBattle();
+        var programs = CreatePrograms(1);
+        var runner = SetupRunner(programs);
 
         runner.Draw();
 
-        Assert.IsTrue(runner.Hand.Contains(blank));
+        Assert.IsTrue(runner.Hand.Contains(programs[0]));
         Assert.AreEqual(0, runner.Stack.Count());
     }
-
+    
     [Test]
     public void Drawing2CardsMoves2CardsFromStackToHand()
     {
-        var blank = new BlankProgram();
-        var blank2 = new BlankProgram();
-        var runner = new Runner(new Rng(new Random()), new List<Program>() { blank, blank2 }, 1);
-        runner.StartBattle();
+        var programs = CreatePrograms(2);
+        var runner = SetupRunner(programs);
 
         runner.Draw(2);
 
-        Assert.IsTrue(runner.Hand.Contains(blank) && runner.Hand.Contains(blank2));
+        CollectionAssert.AreEquivalent(new List<Program> { programs[0], programs[1] }, runner.Hand);
         Assert.AreEqual(0, runner.Stack.Count());
     }
 
     [Test]
     public void DrawingACardWhenTheStackIsEmptyMovesTheHeapToTheStackThenDraws()
     {
-        var blank = new BlankProgram();
-        var runner = new Runner(new Rng(new Random()), new List<Program>() { blank }, 1);
-        runner.StartBattle();
+        var programs = CreatePrograms(1);
+        var runner = SetupRunner(programs);
         runner.Draw();
-        runner.PlayFromHand(blank);
+        runner.PlayFromHand(programs[0]);
 
         runner.Draw();
 
-        Assert.IsTrue(runner.Hand.Contains(blank));
+        Assert.IsTrue(runner.Hand.Contains(programs[0]));
         Assert.AreEqual(0, runner.Stack.Count());
         Assert.AreEqual(0, runner.Heap.Count());
     }
@@ -55,31 +51,44 @@ public class DrawingTests
     [Test]
     public void WhenMovingTheHeapToTheStackByDrawingItIsShuffled()
     {
-        var blanks = new Program[] { new BlankProgram("0"), new BlankProgram("1"), new BlankProgram("2"), new BlankProgram("3"), new BlankProgram("4") };
-        var runner = new Runner(new FakeRandom(new List<int>[] { new List<int> { 0, 1, 2, 3, 4 }, new List<int> { 2, 1, 0, 3, 4 } }), blanks.ToList(), 1);
+        var programs = CreatePrograms(4);
+        var runner = new Runner(new FakeRandom(new List<int>[] { new List<int> { 0, 1, 2, 3 }, new List<int> { 2, 1, 0, 3 } }),
+            programs, 1);
         runner.StartBattle();
-        runner.Draw(5);
-        for (var i = 0; i < 5; i++)
-            runner.PlayFromHand(blanks[i]);
+
+        runner.Draw(4);
+        for (var i = 0; i < 4; i++)
+            runner.PlayFromHand(programs[i]);
 
         runner.Draw();
 
-        Assert.IsTrue(runner.Hand.Contains(blanks[2]));
+        Assert.IsTrue(runner.Hand.Contains(programs[2]));
     }
 
     [Test]
     public void DrawingACardWhenStackAndHeapAreEmptyWillDoNothing()
     {
-        var blank = new BlankProgram();
-        var runner = new Runner(new Rng(new Random()), new List<Program>() { blank }, 1);
-        runner.StartBattle();
-        runner.Draw();
+        var runner = SetupRunner(new List<Program>());
 
         runner.Draw();
 
-        Assert.AreEqual(
-            1, runner.Hand.Count());
+        Assert.AreEqual(0, runner.Hand.Count());
         Assert.AreEqual(0, runner.Stack.Count());
         Assert.AreEqual(0, runner.Heap.Count());
+    }
+
+    private List<Program> CreatePrograms(int amount)
+    {
+        var programs = new List<Program>();
+        for (var i = 0; i < amount; i++)
+            programs.Add(new BlankProgram(i.ToString()));
+        return programs;
+    }
+
+    private static Runner SetupRunner(List<Program> programs)
+    {
+        var runner = new Runner(new Rng(new Random()), programs, 1);
+        runner.StartBattle();
+        return runner;
     }
 }
