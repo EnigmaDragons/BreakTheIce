@@ -4,12 +4,18 @@ namespace Assets.Scripts.BackEnd
 {
     public class Node
     {
-        public List<Node> Connections { get; set; }
+        public List<Node> Connections { get; } = new List<Node>();
         public NodeType Type { get; }
 
-        protected Node(NodeType type)
+        public Node(NodeType type)
         {
             Type = type;
+        }
+
+        public void Connect(Node node)
+        {
+            Connections.Add(node);
+            node.Connections.Add(this);
         }
     }
 }
