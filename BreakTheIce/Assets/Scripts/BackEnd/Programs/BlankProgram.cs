@@ -8,8 +8,11 @@ namespace Assets.Scripts.BackEnd.Programs
 {
     public class BlankProgram : Program
     {
-        public BlankProgram() : base("Blank Card", 0, "Does Nothing", () => { })
+        private string debugName;
+
+        public BlankProgram(string debugName = "") : base("Blank Card", 0, "Does Nothing", (r) => { })
         {
+            this.debugName = debugName;
         }
     }
 }

@@ -13,7 +13,7 @@ public class DrawingTests
     public void DrawingACardMovesACardFromStackToHand()
     {
         var blank = new BlankProgram();
-        var runner = new Runner(new List<Program>() { blank }, 1);
+        var runner = new Runner(new Rng(new Random()), new List<Program>() { blank }, 1);
         runner.StartBattle();
 
         runner.Draw();
@@ -27,7 +27,7 @@ public class DrawingTests
     {
         var blank = new BlankProgram();
         var blank2 = new BlankProgram();
-        var runner = new Runner(new List<Program>() { blank, blank2 }, 1);
+        var runner = new Runner(new Rng(new Random()), new List<Program>() { blank, blank2 }, 1);
         runner.StartBattle();
 
         runner.Draw(2);
@@ -40,7 +40,7 @@ public class DrawingTests
     public void DrawingACardWhenTheStackIsEmptyMovesTheHeapToTheStackThenDraws()
     {
         var blank = new BlankProgram();
-        var runner = new Runner(new List<Program>() { blank }, 1);
+        var runner = new Runner(new Rng(new Random()), new List<Program>() { blank }, 1);
         runner.StartBattle();
         runner.Draw();
         runner.PlayFromHand(blank);
@@ -55,32 +55,23 @@ public class DrawingTests
     [Test]
     public void WhenMovingTheHeapToTheStackByDrawingItIsShuffled()
     {
-        var success = false;
-        for (var attempt = 1; attempt <= 10; attempt++)
-        {
-            var blanks = new Program[] { new BlankProgram(), new BlankProgram(), new BlankProgram(), new BlankProgram(), new BlankProgram() };
-            var runner = new Runner(blanks.ToList(), 1);
-            runner.StartBattle();
-            runner.Draw(5);
-            for (var i = 0; i < 5; i++)
-                runner.PlayFromHand(blanks[i]);
+        var blanks = new Program[] { new BlankProgram("0"), new BlankProgram("1"), new BlankProgram("2"), new BlankProgram("3"), new BlankProgram("4") };
+        var runner = new Runner(new FakeRandom(new List<int>[] { new List<int> { 0, 1, 2, 3, 4 }, new List<int> { 2, 1, 0, 3, 4 } }), blanks.ToList(), 1);
+        runner.StartBattle();
+        runner.Draw(5);
+        for (var i = 0; i < 5; i++)
+            runner.PlayFromHand(blanks[i]);
 
-            runner.Draw();
+        runner.Draw();
 
-            if (!runner.Hand.Contains(blanks[0]))
-            {
-                success = true;
-                break;
-            }
-        }
-        Assert.IsTrue(success);
+        Assert.IsTrue(runner.Hand.Contains(blanks[2]));
     }
 
     [Test]
     public void DrawingACardWhenStackAndHeapAreEmptyWillDoNothing()
     {
         var blank = new BlankProgram();
-        var runner = new Runner(new List<Program>() { blank }, 1);
+        var runner = new Runner(new Rng(new Random()), new List<Program>() { blank }, 1);
         runner.StartBattle();
         runner.Draw();
 

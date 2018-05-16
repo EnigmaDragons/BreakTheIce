@@ -7,9 +7,9 @@ namespace Assets.Scripts.BackEnd.Programs
         public string Name { get; private set; }
         public int Cost { get; private set; }
         public string Text { get; private set; }
-        private Action action;
+        private Action<Runner> action;
 
-        protected Program(string name, int cost, string text, Action action)
+        protected Program(string name, int cost, string text, Action<Runner> action)
         {
             Name = name;
             Cost = cost;
@@ -17,9 +17,9 @@ namespace Assets.Scripts.BackEnd.Programs
             this.action = action;
         }
 
-        public void Play()
+        public void Play(Runner player)
         {
-            action();
+            action(player);
         }
     }
 }

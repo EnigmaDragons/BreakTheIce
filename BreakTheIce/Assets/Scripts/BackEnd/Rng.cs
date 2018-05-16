@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Assets.Scripts.BackEnd
 {
-    public class Rng
+    public class Rng : IRandom
     {
         private readonly Random value;
 

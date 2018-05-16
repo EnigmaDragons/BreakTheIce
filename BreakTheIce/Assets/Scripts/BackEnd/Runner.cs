@@ -13,14 +13,16 @@ namespace Assets.Scripts.BackEnd
         public int BrainDamage { get; private set; }
         public int Tags { get; private set; }
         public int Time { get; private set; }
+        public IRandom Random { get; }
 
         public List<Program> InstalledPrograms { get; private set; }
         public List<Program> Stack { get; private set; } = new List<Program>();
         public List<Program> Hand { get; private set; } = new List<Program>();
         public List<Program> Heap { get; private set; } = new List<Program>();
 
-        public Runner(List<Program> installedPrograms, int hp, int money = 0)
+        public Runner(IRandom random, List<Program> installedPrograms, int hp, int money = 0)
         {
+            Random = random;
             Money = money;
             MaxHP = hp;
             Hp = hp;
@@ -32,7 +34,7 @@ namespace Assets.Scripts.BackEnd
         public void PlayFromHand(Program program)
         {
             Time -= program.Cost;
-            program.Play();
+            program.Play(this);
             Hand.Remove(program);
             Heap.Add(program);
         }
@@ -40,7 +42,8 @@ namespace Assets.Scripts.BackEnd
         public void StartBattle()
         {
             Stack = InstalledPrograms;
-            new Rng(new Random()).Shuffle(Stack);
+            Random.Shuffle(Stack);
+            Time = 3;
         }
 
         public void Draw(int amount = 1)
@@ -55,7 +58,7 @@ namespace Assets.Scripts.BackEnd
                 else if (Heap.Any(p => true))
                 {
                     Stack = Heap;
-                    new Rng(new Random()).Shuffle(Stack);
+                    Random.Shuffle(Stack);
                     Heap = new List<Program>();
                     Hand.Add(Stack[0]);
                     Stack.RemoveAt(0);
@@ -65,6 +68,11 @@ namespace Assets.Scripts.BackEnd
                     break;
                 }
             }
+        }
+
+        public void GainMaxHp(int amount)
+        {
+            MaxHP += amount;
         }
     }
 }

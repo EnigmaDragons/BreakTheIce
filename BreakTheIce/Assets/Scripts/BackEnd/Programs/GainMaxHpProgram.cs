@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.BackEnd.Programs
 {
-    class GainMaxHpProgram
+    public class GainMaxHpProgram : Program
     {
+        public GainMaxHpProgram() : base("Gain Max HP", 1, "Gives you 1 max hp", (r) => { r.GainMaxHp(1); })
+        {
+        }
     }
 }

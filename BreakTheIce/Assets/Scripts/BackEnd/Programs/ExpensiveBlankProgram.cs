@@ -8,7 +8,7 @@ namespace Assets.Scripts.BackEnd.Programs
 {
     public class ExpensiveBlankProgram : Program
     {
-        public ExpensiveBlankProgram() : base("Expensive Blank Card", 2, "Does Nothing", () => { })
+        public ExpensiveBlankProgram() : base("Expensive Blank Card", 2, "Does Nothing", (r) => { })
         {
         }
     }
