@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 
 public class PlayingTests
 {
+    private const int startingMaxHp = 1;
+
     [Test]
     public void PlayingFromHandDiscardsTheCardAfterwords()
     {
@@ -41,12 +43,12 @@ public class PlayingTests
 
         runner.PlayFromHand(program);
 
-        Assert.Greater(runner.MaxHP, 1);
+        Assert.Greater(runner.MaxHP, startingMaxHp);
     }
 
     private static Runner SetupRunnerWith(Program program)
     {
-        var runner = new Runner(new Rng(new Random()), new List<Program>() { program }, 1);
+        var runner = new Runner(new Rng(new Random()), new List<Program>() { program }, startingMaxHp);
         runner.StartBattle();
         runner.Draw();
         return runner;

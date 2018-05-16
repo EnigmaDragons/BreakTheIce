@@ -50,9 +50,9 @@ namespace Assets.Scripts.BackEnd
         {
             for (var i = 0; i < amount; i++)
             {
-                if (Stack.Any(p => true))
+                if (Stack.Any())
                     MoveProgramFrom(Stack, Hand, 0);
-                else if (Heap.Any(p => true))
+                else if (Heap.Any())
                 {
                     ShuffleHeapIntoStack();
                     MoveProgramFrom(Stack, Hand, 0);
