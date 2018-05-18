@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 4177272038884454}
   - component: {fileID: 33297088538920996}
   - component: {fileID: 23752989207068454}
+  - component: {fileID: 114000192925031242}
   m_Layer: 0
   m_Name: Checkpoint
   m_TagString: Untagged
@@ -170,3 +171,14 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4278190080
+--- !u!114 &114000192925031242
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1704893882330200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c938ff9825f43084886a1a887a7426e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
