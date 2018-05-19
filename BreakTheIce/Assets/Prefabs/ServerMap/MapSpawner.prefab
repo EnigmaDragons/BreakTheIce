@@ -51,9 +51,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70fef7266a188094bbaff48e5ce550c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Barrier: {fileID: 1630751352649800, guid: fe4c7ee5e5f29c942a5ebc27fdc25c47, type: 2}
-  Sentry: {fileID: 1298981484321096, guid: 86f9b40e78ab02c4f8c182b285db31b0, type: 2}
-  CodeGate: {fileID: 1369818508376644, guid: fac55fbc6eca830478bdc164841f49bf, type: 2}
-  Boss: {fileID: 1417922673654770, guid: 0a10aa4ef2c02504b876d01c4780b8bd, type: 2}
-  Checkpoint: {fileID: 1704893882330200, guid: bb3d25b24b2e7de469dd12677b6f3bcc, type: 2}
-  Mystery: {fileID: 1656311056331052, guid: b99c3321924f19e4da413c082f4d9007, type: 2}
+  Barrier: {fileID: 114801196664638310, guid: fe4c7ee5e5f29c942a5ebc27fdc25c47, type: 2}
+  Sentry: {fileID: 114587254549520062, guid: 86f9b40e78ab02c4f8c182b285db31b0, type: 2}
+  CodeGate: {fileID: 114616919592375914, guid: fac55fbc6eca830478bdc164841f49bf, type: 2}
+  Boss: {fileID: 114593558734125636, guid: 0a10aa4ef2c02504b876d01c4780b8bd, type: 2}
+  Checkpoint: {fileID: 114000192925031242, guid: bb3d25b24b2e7de469dd12677b6f3bcc,
+    type: 2}
+  ServerLine: {fileID: 114654665821483466, guid: 116d7081887027b47a6a07ca13a7c6b1,
+    type: 2}

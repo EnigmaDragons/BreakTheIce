@@ -21,7 +21,7 @@ namespace Assets.Scripts.FrontEnd
             {
                 var vector = Vector3.zero;
                 while (takenSpots.Any(spot => spot.x == vector.x && spot.z == vector.z))
-                    vector = new Vector3(Random.Range(-4, 4), 0, Random.Range(-4, 4));
+                    vector = new Vector3(Random.Range(-4, 4) * 2, 0, Random.Range(-4, 4) * 2);
                 takenSpots.Add(vector);
                 return new PositionedNode(x, vector);
             }).ToList();
